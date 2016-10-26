@@ -1,5 +1,6 @@
 # SurvivalPy
 [![PyPI version](https://badge.fury.io/py/SurvivalPy.svg)](https://badge.fury.io/py/SurvivalPy)
+[![Build Status](https://travis-ci.org/andricDu/SurvivalPy.svg?branch=master)](https://travis-ci.org/andricDu/SurvivalPy)
 
 Survival Analysis functionalities for Python. 
 
