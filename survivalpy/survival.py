@@ -34,6 +34,10 @@ class Datum:
         self.meta = meta
 
     def to_json_dict(self):
+        """
+        Converts the object to json serializable dict
+        :return: a dictionary
+        """
         return {
             "time": self.time,
             "censored": self.censored,
@@ -68,6 +72,10 @@ class Interval:
         return len([datum for datum in self.data if datum.censored])
 
     def to_json_dict(self):
+        """
+        Converts the object to json serializable dict
+        :return: a dictionary
+        """
         return {
             "start": self.start,
             "end": self.end,
