@@ -13,19 +13,3 @@
 # OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER
 # IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
 # ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-from setuptools import setup, find_packages
-setup(
-    name="SurvivalPy",
-    version="0.0.2",
-    packages=find_packages(),
-
-    requires=["future", "scipy"],
-
-    # metadata for upload to PyPI
-    author="andricDu",
-    author_email="dusan.andric@oicr.on.ca",
-    description="Kaplan-Meier Survival Plots and related statistics",
-    license="GPLv3",
-    keywords="survival analysis kaplan meier plot cancer",
-    url="https://github.com/andricDu/SurvivalPy",  # project home page, if any
-)
