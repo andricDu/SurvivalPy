@@ -16,10 +16,10 @@
 from setuptools import setup, find_packages
 setup(
     name="SurvivalPy",
-    version="0.0.1",
+    version="0.0.2",
     packages=find_packages(),
 
-    requires="future",
+    requires=["future"],
 
     # metadata for upload to PyPI
     author="andricDu",

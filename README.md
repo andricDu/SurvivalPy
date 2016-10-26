@@ -3,6 +3,12 @@ Survival Analysis functionalities for Python.
 
 Compatible with Python 2 or 3. 
 
+## Installation
+`$ pip install SurvivalPy`
+
+## Development 
+A requirements.txt file is provided for use with `pip` and `virtualenv`
+
 ## Example
 
 Sample Data:
