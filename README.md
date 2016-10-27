@@ -53,7 +53,7 @@ The results will be a list of intervals. If you serialize to json using the `to_
 
 To perform a log-rank test between two or more curves:
 ```
-from survivaly.logrank import LogRankTest
+from survivalpy.logrank import LogRankTest
 from survivalpy.survival import Analyzer
 
 ...
