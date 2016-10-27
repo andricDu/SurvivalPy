@@ -20,6 +20,7 @@ from survivalpy.logrank import LogRankTest
 import unittest
 import json
 
+
 class TestAll(unittest.TestCase):
 
     def test_identical(self):
