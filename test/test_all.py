@@ -16,46 +16,38 @@
 from __future__ import print_function
 from survivalpy.survival import Analyzer
 from survivalpy.survival import Datum
-from survivalpy.survival import Interval
+from survivalpy.logrank import LogRankTest
 import unittest
 import json
 
+class TestAll(unittest.TestCase):
 
-class TestAnalyzer(unittest.TestCase):
+    def test_identical(self):
+        """
+        When curves are identical, pvalue should be exactly one.
+        """
+        data1 = [Datum(7, True, {'id': 55}),
+                 Datum(9, False, {'id': 11}),
+                 Datum(2, True, {'id': 54}),
+                 Datum(3, True, {'id': 19}),
+                 Datum(1, False, {'id': 4}),
+                 Datum(11, False, {'id': 21})]
+        analyzer1 = Analyzer(data1)
+        results1 = analyzer1.compute()
 
-    def test_sorting(self):
-        data = [Datum(7, True), Datum(9, False), Datum(2, True), Datum(3, True)]
-        analyzer = Analyzer(data)
-        analyzer.compute()
+        data2 = [Datum(7, True, {'id': 55}),
+                 Datum(9, False, {'id': 11}),
+                 Datum(2, True, {'id': 54}),
+                 Datum(3, True, {'id': 19}),
+                 Datum(1, False, {'id': 4}),
+                 Datum(11, False, {'id': 21})]
+        analyzer2 = Analyzer(data2)
+        results2 = analyzer2.compute()
 
-        self.assertEqual(data[0].time, 2)
-        self.assertEqual(data[3].time, 9)
+        test = LogRankTest([results1, results2])
+        stats = test.compute()
+        print(json.dumps(stats))
 
-    def test_computed_interval_numbers(self):
-        data = [Datum(7, True, {'id': 55}),
-                Datum(9, False, {'id': 11}),
-                Datum(2, True, {'id': 54}),
-                Datum(3, True, {'id': 19}),
-                Datum(1, False, {'id': 4}),
-                Datum(11, False, {'id': 21})]
-        analyzer = Analyzer(data)
-        results = analyzer.compute()
-
-        json_results = []
-        for interval in results:
-            json_results.append(interval.to_json_dict())
-
-        print(json.dumps(json_results))
-
-        self.assertEqual(len(results), 4)
-        self.assertAlmostEqual(results[1].cumulative, 0.83333333)
-
-
-class TestInterval(unittest.TestCase):
-
-    def test_interval(self):
-        data = [Datum(1, False), Datum(1, True), Datum(1, False), Datum(1, True)]
-        interval = Interval(0, 2)
-        interval.data = data
-
-        self.assertEqual(interval.get_censored(), 2)
+        self.assertEqual(stats['degreesFreedom'], 1)
+        self.assertEqual(stats['pValue'], 1)
+        self.assertAlmostEqual(stats['chiSquared'], 0, 2)

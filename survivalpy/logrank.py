@@ -14,6 +14,7 @@
 # IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
 # ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 from __future__ import division
+from __future__ import print_function
 from collections import OrderedDict
 from functools import reduce
 import math
@@ -23,6 +24,8 @@ from scipy import stats
 class LogRankTest:
     """
     Performs a Log-Rank test of significance for provided survival results
+    http://www.mas.ncl.ac.uk/~njnsm/medfac/docs/surv.pdf - http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3059453/
+    Port of: 
     """
 
     def __init__(self, survival_results):
@@ -47,7 +50,7 @@ class LogRankTest:
         """
         samples = OrderedDict()
 
-        for i in range(0, self.num_sets - 1):
+        for i in range(0, self.num_sets):
             result = survival_results[i]
             result_data = reduce(list.__add__, map(lambda interval: interval.data, result))
 
@@ -66,7 +69,7 @@ class LogRankTest:
 
                 samples.__setitem__(time, sample)
 
-        return samples
+        return OrderedDict(sorted(samples.items()))
 
     def compute(self):
         """
@@ -87,13 +90,13 @@ class LogRankTest:
             total_died = sum(died)
             total_alive = sum(alive)
 
-            for i in range(0, self.num_sets - 1):
+            for i in range(0, self.num_sets):
                 expected = total_died * (alive[i] / total_alive)
                 expected_sums[i] += expected
-                alive[i] -= (died[i] - censored[i])
+                alive[i] = alive[i] - died[i] - censored[i]
 
         chi_squared = 0
-        for i in range(0, self.num_sets - 1):
+        for i in range(0, self.num_sets):
             chi_squared += math.pow(self.total_observed[i] - expected_sums[i], 2) / expected_sums[i]
         p_value = 1 - stats.chi2.cdf(chi_squared, self.num_sets - 1)
 

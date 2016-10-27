@@ -121,7 +121,7 @@ class Analyzer:
         start_time = 0
         end_time = 0
 
-        for i in range(0, len(time)-1):
+        for i in range(0, len(time)):
             end_time = time[i]
             if not censored[i] and end_time > start_time:
                 intervals.append(Interval(start_time, end_time))
@@ -136,7 +136,7 @@ class Analyzer:
         current_interval = next(interval_iter)
         current_interval.cumulative = cumulative_survival
 
-        for i in range(0, len(time)-1):
+        for i in range(0, len(time)):
             t = time[i]
 
             if t > current_interval.end:
