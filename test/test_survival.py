@@ -41,10 +41,7 @@ class TestAnalyzer(unittest.TestCase):
         analyzer = Analyzer(data)
         results = analyzer.compute()
 
-        json_results = []
-        for interval in results:
-            json_results.append(interval.to_json_dict())
-
+        json_results = list(map(lambda interval: interval.to_json_dict(), results))
         print(json.dumps(json_results))
 
         self.assertEqual(len(results), 4)
