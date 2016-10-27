@@ -47,7 +47,10 @@ results = analyzer.compute()
 ```
 
 The results will be a list of intervals. If you serialize to json using the `to_json_dict` method of the `Interval`s, it will look like:
-```json
+```python
+>>> results = analyzer.compute()
+>>> json_results = list(map(lambda interval: interval.to_json_dict(), results))
+>>> print(json.dumps(json_results))
 [{"start": 0, "donors": [{"time": 1, "censored": false, "meta": {"id": "D13"}}, {"time": 1, "censored": true, "meta": {"id": "D54"}}], "censored": 1, "died": 1, "cumulativeSurvival": 1, "end": 1}, {"start": 0, "donors": [{"time": 3, "censored": false, "meta": {"id": "D81"}}], "censored": 0, "died": 1, "cumulativeSurvival": 0.8333333333333334, "end": 3}, {"start": 0, "donors": [{"time": 4, "censored": false, "meta": {"id": "D95"}}], "censored": 0, "died": 1, "cumulativeSurvival": 0.8, "end": 4}, {"start": 0, "donors": [{"time": 6, "censored": true, "meta": {"id": "D32"}}, {"time": 6, "censored": false, "meta": {"id": "D20"}}], "censored": 1, "died": 1, "cumulativeSurvival": 0.75, "end": 6}, {"start": 0, "donors": [], "censored": 0, "died": 0, "cumulativeSurvival": 0, "end": 6}]
 ```
 
