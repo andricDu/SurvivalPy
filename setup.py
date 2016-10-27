@@ -16,7 +16,7 @@
 from setuptools import setup, find_packages
 setup(
     name="SurvivalPy",
-    version="0.0.2",
+    version="1.0.0",
     packages=find_packages(),
 
     requires=["future", "scipy"],

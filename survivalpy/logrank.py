@@ -25,7 +25,7 @@ class LogRankTest:
     """
     Performs a Log-Rank test of significance for provided survival results
     http://www.mas.ncl.ac.uk/~njnsm/medfac/docs/surv.pdf - http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3059453/
-    Port of: 
+    Port of: SurvivalLogRank.java from https://github.com/icgc-dcc/dcc-portal
     """
 
     def __init__(self, survival_results):
