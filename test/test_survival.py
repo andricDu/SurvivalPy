@@ -18,34 +18,31 @@ from survivalpy.survival import Analyzer
 from survivalpy.survival import Datum
 from survivalpy.survival import Interval
 import unittest
-import json
+import pprint
 
 
 class TestAnalyzer(unittest.TestCase):
 
-    def test_sorting(self):
-        data = [Datum(7, True), Datum(9, False), Datum(2, True), Datum(3, True)]
-        analyzer = Analyzer(data)
-        analyzer.compute()
-
-        self.assertEqual(data[0].time, 2)
-        self.assertEqual(data[3].time, 9)
-
     def test_computed_interval_numbers(self):
         data = [Datum(7, True, {'id': 55}),
                 Datum(9, False, {'id': 11}),
+                Datum(9, False, {'id': 12}),
                 Datum(2, True, {'id': 54}),
                 Datum(3, True, {'id': 19}),
-                Datum(1, False, {'id': 4}),
+                Datum(15, False, {'id': 19}),
+                Datum(1, True, {'id': 92}),
+                Datum(14, True, {'id': 33}),
+                Datum(1, False, {'id': 44}),
                 Datum(11, False, {'id': 21})]
         analyzer = Analyzer(data)
         results = analyzer.compute()
 
         json_results = list(map(lambda interval: interval.to_json_dict(), results))
-        print(json.dumps(json_results))
+        pprint.pprint(json_results)
 
-        self.assertEqual(len(results), 3)
-        self.assertAlmostEqual(results[1].cumulative, 0.83333333)
+        self.assertEqual(len(results), 4)
+        self.assertAlmostEqual(results[1].cumulative, 0.888888888)
+        self.assertAlmostEqual(results[2].cumulative, 0.533333333)
 
 
 class TestInterval(unittest.TestCase):

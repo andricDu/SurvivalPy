@@ -97,11 +97,8 @@ class Analyzer:
         Constructor that takes a list of Datum object
         :param data: list of Datum objects
         """
-        self.data = data
+        self.data = sorted(list(data), key=lambda d: d.time)
         self.intervals = None
-
-    def __sort(self):
-        self.data.sort(key=lambda d: d.time)
 
     def compute(self):
         """
@@ -109,7 +106,6 @@ class Analyzer:
         which is required for the analysis.
         :return: A list of intervals
         """
-        self.__sort()  # Sorting is required by algorithm
 
         time = []  # Times of incidents
         censored = []  # Type of incident (censured/dead)
@@ -143,7 +139,8 @@ class Analyzer:
             if t > current_interval.end:
                 at_risk -= current_interval.get_censored()
                 survivors = at_risk - current_interval.died
-                cumulative_survival = survivors / at_risk
+                multiplier = survivors / at_risk
+                cumulative_survival *= multiplier
 
                 at_risk -= current_interval.died
                 while t > current_interval.end:
