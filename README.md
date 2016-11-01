@@ -3,9 +3,9 @@
 [![Build Status](https://travis-ci.org/andricDu/SurvivalPy.svg?branch=master)](https://travis-ci.org/andricDu/SurvivalPy)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/83429cb40db54f918cb402da4bee0318)](https://www.codacy.com/app/icgc-dcc/SurvivalPy?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=andricDu/SurvivalPy&amp;utm_campaign=Badge_Grade)
 
-Survival Analysis functionalities for Python. 
+Survival Analysis functionalities for Python. Compatible with Python 2 or 3. 
 
-Compatible with Python 2 or 3. 
+Analysis output is compatible for visualizations with: https://github.com/oncojs/survivalplot
 
 ## Installation
 `$ pip install SurvivalPy`
