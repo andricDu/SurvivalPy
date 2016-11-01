@@ -44,7 +44,7 @@ class TestAnalyzer(unittest.TestCase):
         json_results = list(map(lambda interval: interval.to_json_dict(), results))
         print(json.dumps(json_results))
 
-        self.assertEqual(len(results), 4)
+        self.assertEqual(len(results), 3)
         self.assertAlmostEqual(results[1].cumulative, 0.83333333)
 
 

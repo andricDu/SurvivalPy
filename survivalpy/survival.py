@@ -125,6 +125,7 @@ class Analyzer:
             end_time = time[i]
             if not censored[i] and end_time > start_time:
                 intervals.append(Interval(start_time, end_time))
+                start_time = end_time
         if end_time > start_time:
             intervals.append(Interval(start_time, end_time))
 
