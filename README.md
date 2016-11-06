@@ -2,6 +2,7 @@
 [![PyPI version](https://badge.fury.io/py/SurvivalPy.svg)](https://badge.fury.io/py/SurvivalPy)
 [![Build Status](https://travis-ci.org/andricDu/SurvivalPy.svg?branch=master)](https://travis-ci.org/andricDu/SurvivalPy)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/83429cb40db54f918cb402da4bee0318)](https://www.codacy.com/app/icgc-dcc/SurvivalPy?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=andricDu/SurvivalPy&amp;utm_campaign=Badge_Grade)
+[![Coverage Status](https://coveralls.io/repos/github/andricDu/SurvivalPy/badge.svg?branch=master)](https://coveralls.io/github/andricDu/SurvivalPy?branch=master)
 
 Survival Analysis functionalities for Python. Compatible with Python 2 or 3. 
 
