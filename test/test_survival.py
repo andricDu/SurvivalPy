@@ -20,6 +20,7 @@ from survivalpy.survival import Interval
 import unittest
 import pprint
 import pickle
+import os
 
 
 class TestAnalyzer(unittest.TestCase):
@@ -50,12 +51,14 @@ class TestAnalyzer(unittest.TestCase):
         This test ensures that cumulative survival can only decrease.
         Test data from pickle is original data set that identified the bug.
         """
-        data = filter(lambda d: d.time is not None, pickle.load(open('survival.p', 'rb')))
-        analyzer = Analyzer(data)
-        results = analyzer.compute()
-        cum_suv = list(map(lambda interval: interval.cumulative, results))
 
-        self.assertEqual(True, all(a >= b for a, b in zip(cum_suv[:-1], cum_suv[1:])))
+        with open(os.path.join(os.path.dirname(__file__), 'survival.p'), 'rb') as pickle_file:
+            data = filter(lambda d: d.time is not None, pickle.load(pickle_file))
+            analyzer = Analyzer(data)
+            results = analyzer.compute()
+            cum_suv = list(map(lambda interval: interval.cumulative, results))
+
+            self.assertEqual(True, all(a >= b for a, b in zip(cum_suv[:-1], cum_suv[1:])))
 
 
 class TestInterval(unittest.TestCase):
